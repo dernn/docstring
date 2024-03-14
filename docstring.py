@@ -64,3 +64,9 @@ async def process_messages(messages, do_async):
         update_user_messages(user, message)
         await process_message(message, do_async)
         return 200, 'OK'
+
+
+# Докстрока (docstring) для любого задокументированного объекта (модуля, класса, объекта класса или функции)
+# доступна через специальный атрибут __doc__
+print(functools.wraps.__doc__)
+# Таким образом, даже работая из консоли, можно быстро получить документацию к коду
