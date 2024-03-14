@@ -40,11 +40,25 @@ async def process_message(message, do_async):
         db_conn.write('message', data)
 
 
-# Чем лаконичнее докстрока, тем лучше: читатель сумеет быстрее понять суть происходящего.
-# Поэтому принято по возможности сокращать докстроки до одной строчки:
+# Иногда важно описать, за что отвечают аргументы функции, или просто дать читателю больше контекста
+# В таком случае докстроки можно разнести на несколько строк.
+# На строчке с первыми кавычками при этом необходимо оставить краткую справку о функции:
 @catch_db_exceptions
 async def process_messages(messages, do_async):
-    """Process each message and update them in the user info."""
+    """Process each message and update them in the user info.
+
+    You can use this function as a shortcut when you don't care
+    about manually specifying parameters for the update and just
+    want control over whether or not messages will be processed
+    synchronously.
+
+    Parameters
+        ----------
+        messages : list[Message]
+            List of messages
+        do_async : bool
+            Whether to run the processing asynchronously
+    """
     for message in messages:
         user = get_user(message['user']['id'])
         update_user_messages(user, message)
