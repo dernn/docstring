@@ -40,8 +40,11 @@ async def process_message(message, do_async):
         db_conn.write('message', data)
 
 
+# Чем лаконичнее докстрока, тем лучше: читатель сумеет быстрее понять суть происходящего.
+# Поэтому принято по возможности сокращать докстроки до одной строчки:
 @catch_db_exceptions
 async def process_messages(messages, do_async):
+    """Process each message and update them in the user info."""
     for message in messages:
         user = get_user(message['user']['id'])
         update_user_messages(user, message)
